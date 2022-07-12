@@ -1,39 +1,38 @@
 """
 PROBLEM STATEMENT 
-You are incharge of the cake for your niece's birthday and have decided
-the cake would have one candle for each year of her total age. When she
-blows out the candles, she'll only be able to blow out the tallest ones. 
-Find out how many candles she can successfully blow out. 
+Given a time in 12 hour AM/PM format, convert it to a military (24 hour) time. 
+Note: Midnight is 12:00.00am on a 12-hour clock, and 00:00:00 on a 24-hour clock.
+Noon is 12:00.00pm on a 12-hour clock, and 12:00:00 on a 24-hour clock..
+
+CONDITIONS
 
 SAMPLE INPUT 
-4 years old
-arr = [4, 4, 1, 3]
+A single string containing a time in 12 hour clock format i.e 
+hh:mm:ss AM or hh:mm:ss PM where 01 <= hh <= 12 and
+00 <= mm, ss <= 59.
+
+07:05:45PM
 
 SAMPLE OUTPUT 
-2
+Convert and print in 24-hours format where 
+00 <= hh <= 23
 
+19:05:45
+
+CONSTRAINT
+All input times are valid
 """
 
-# solution 1 
-def birthdayCakeCandles1(arr):
-    n = len(arr)
-    maximum = 0 
-    count = 0 
 
-    for i in range(n):
-        if arr[i] > maximum:
-            maximum = arr[i]
-            count = 1
-        elif arr[i] == maximum:
-            count += 1
+def timeConversion(s):
+    meridian = s[-2:]
 
-    return count
+    if meridian == 'PM' and s[:2] != '12':
+        s = str(12 + int(s[:2])) + s[2:]
+    elif meridian == 'AM' and s[:2] == '12':
+        s = '00' + s[2:]
+    
+    return s[:-2]
 
-
-# Solution 2
-def birthdayCakeCandles(arr):
-    return arr.count(max(arr))
-
-
-arr = [4, 4, 1, 3]
-print(birthdayCakeCandles(arr))
+time = "07:05:45PM"
+print(timeConversion(time))
