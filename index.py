@@ -1,12 +1,23 @@
-"""
-PROBLEM STATEMENT 
+from collections import Counter
 
-CONDITIONS
+def beautifultriplets(d, arr):
+    n = Counter(arr)
 
-SAMPLE INPUT 
+    print("counter n == ", n)
+    count = 0
 
-SAMPLE OUTPUT 
+    for i, v in n.items():
+        print("i == ", i, v)
 
-CONSTRAINT
-"""
+    for num in arr:
+        if n[num + d] and n[num + d + d]:
+            
+            count += 1
+    return count
 
+
+
+arr = [1, 2, 4, 5, 7, 8, 10]
+d = 3
+n = 7
+print(beautifultriplets(d, arr))
